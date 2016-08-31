@@ -7,8 +7,9 @@
     <string name="labelCantidadDias">Cantidad de días</string>
 
     <string name="labelGanancia">Ganancia</string>
+    <string name= "labelGananciaNum">$ %1$.2f </string>
     <string name="labelCheckBox">Renovar automáticamente al Vencimiento</string>
     <string name="labelButtonPlazoFijo">HACER PLAZO FIJO</string>
-    <string name="labelSuccess">Plazo fijo realizado. Recibirá X al vecimiento!</string>
+    <string name="labelSuccess">Plazo fijo realizado. Recibirá %1$.2f al vecimiento!</string>
     
 </resources>

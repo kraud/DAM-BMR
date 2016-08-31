@@ -87,8 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
-            android:id="@+id/textView"
+            android:text="0"
+            android:id="@+id/cantidadDiasText"
             android:layout_gravity="center_horizontal" />
 
         <TextView
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="$"
+            android:text="@string/labelGananciaNum"
             android:id="@+id/labelGananciaNum" />
 
         <CheckBox
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/labelSuccess"
-            android:id="@+id/textView2" />
+            android:id="@+id/successText" />
 
     </LinearLayout>
 </RelativeLayout>
