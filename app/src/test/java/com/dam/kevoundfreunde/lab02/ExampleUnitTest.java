@@ -1,4 +1,4 @@
-package com.dam.kevoundfreunde.lab01c2016;
+package com.dam.kevoundfreunde.lab02;
 
 import org.junit.Test;
 
