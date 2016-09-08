@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.text.DecimalFormat;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                         android.R.layout.simple_list_item_single_choice, listaPostre);
                 break;
         }
+        seleccion = null;
         listaSeleccion.setAdapter(adaptador);
     }
 
@@ -102,10 +104,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                     tipoPedido.clearCheck();
                     seleccion = null;
                 } else if (seleccion == null) {
-                    Log.v("hacerToast", "Toast no hay selección.");
+                    Toast.makeText(getApplicationContext(), "Debes seleccionar algo",
+                            Toast.LENGTH_SHORT).show();
                 }
                 else if(confirmado) {
-                    Log.v("hacerToast", "Se confirmó ya.");
+                    Toast.makeText(getApplicationContext(), "Ya se ha confirmado el pedido",
+                            Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.buttonReiniciar:
@@ -121,10 +125,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                     confirmado = true;
                 }
                 else if(confirmado) {
-                    Log.v("hacerToast", "Toast de ya confirmado");
+                    Toast.makeText(getApplicationContext(), "El pedido ya fue confirmado",
+                            Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Log.v("hacerToast", "Toast de pedí algo boludo");
+                    Toast.makeText(getApplicationContext(), "Debes pedir algo primero",
+                            Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
