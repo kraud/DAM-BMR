@@ -1,9 +1,11 @@
 package com.dam.kevoundfreunde.lab02;
 
+import android.content.DialogInterface;
 import android.icu.util.RangeValueIterator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +20,8 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
+        View.OnClickListener, AdapterView.OnItemClickListener {
     DecimalFormat f = new DecimalFormat("##.00");
 
     ElementoMenu[] listaBebidas;
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private Button agregar;
     private Button confirmar;
     private Button reiniciar;
+    private ElementoMenu seleccion = null;
+    private float precioTotal = 0;
+    private boolean confirmado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,26 +57,82 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         reiniciar = (Button) findViewById(R.id.buttonReiniciar);
 
         tipoPedido.setOnCheckedChangeListener(this);
+        listaSeleccion.setOnItemClickListener(this);
+
+        agregar.setOnClickListener(this);
+        confirmar.setOnClickListener(this);
+        reiniciar.setOnClickListener(this);
 
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        ArrayAdapter<RadioButton>
+        ArrayAdapter<ElementoMenu> adaptador;
+        ElementoMenu[] vacio = new ElementoMenu[0];
+        adaptador = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, vacio);
         switch (checkedId){
             case -1:
+                adaptador = new ArrayAdapter<>(this,
+                        android.R.layout.simple_spinner_item, vacio);
                 break;
             case R.id.radioBebida:
-                Log.v("radioBebida", "Se selecciono radio Bebida");
+                adaptador = new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_single_choice, listaBebidas);
                 break;
             case R.id.radioPlato:
-                Log.v("radioPlato", "Se selecciono radio Plato");
+                adaptador = new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_single_choice, listaPlatos);
                 break;
             case R.id.radioPostre:
-                Log.v("radioPostre", "Se selecciono radio Postre");
+                adaptador = new ArrayAdapter<>(this,
+                        android.R.layout.simple_list_item_single_choice, listaPostre);
                 break;
         }
+        listaSeleccion.setAdapter(adaptador);
+    }
 
+    @Override
+    public void onClick(View boton) {
+        switch(boton.getId()) {
+            case R.id.buttonAgregar:
+                if (seleccion != null && !confirmado) {
+                    pedido.append(seleccion.toString() + '\n');
+                    precioTotal += seleccion.getPrecio();
+                    tipoPedido.clearCheck();
+                    seleccion = null;
+                } else if (seleccion == null) {
+                    Log.v("hacerToast", "Toast no hay selección.");
+                }
+                else if(confirmado) {
+                    Log.v("hacerToast", "Se confirmó ya.");
+                }
+                break;
+            case R.id.buttonReiniciar:
+                pedido.setText("");
+                seleccion = null;
+                tipoPedido.clearCheck();
+                precioTotal = 0;
+                confirmado = false;
+                break;
+            case R.id.buttonConfirmar:
+                if(!confirmado && precioTotal != 0) {
+                    pedido.append(String.format("\nTotal: $%.2f", precioTotal));
+                    confirmado = true;
+                }
+                else if(confirmado) {
+                    Log.v("hacerToast", "Toast de ya confirmado");
+                }
+                else {
+                    Log.v("hacerToast", "Toast de pedí algo boludo");
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        seleccion = (ElementoMenu) listaSeleccion.getItemAtPosition(position);
     }
 
     class ElementoMenu {
