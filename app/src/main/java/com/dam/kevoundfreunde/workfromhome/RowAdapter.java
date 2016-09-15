@@ -1,6 +1,7 @@
 package com.dam.kevoundfreunde.workfromhome;
 
 import android.content.Context;
+import android.graphics.drawable.Icon;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,13 @@ import java.util.zip.Inflater;
 public class RowAdapter extends BaseAdapter {
     LayoutInflater inflater;
     Trabajo[] listTrabajos;
+    Context contexto;
 
     RowAdapter(Trabajo[] trabajos, Context context){
         super();
         inflater = LayoutInflater.from(context);
         listTrabajos = trabajos;
+        contexto = context;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class RowAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = inflater.inflate(R.layout.row_layout, parent, false);
+        View row = inflater.inflate(R.layout.row_layout, null);
 
         TextView puesto, corporation, details, deadline;
         ImageView flag;
@@ -58,15 +61,38 @@ public class RowAdapter extends BaseAdapter {
 
 
         puesto.setText(listTrabajos[position].getCategoria().getDescripcion());
-        details.setText("ARREGLAR HORAS Y PAGO TODO");
-        /* corporation.setText(listTrabajos[position].getDescripcion();
-        deadline.setText(SimpleDateFormat("AAAA-MM-DD",listTrabajos[position].getFechaEntrega()));
-        details.setText(listTrabajos[position].getCategoria().getDescripcion());
-        flag.setImageIcon(listTrabajos[position].getCategoria().getDescripcion());
-        english.setText(listTrabajos[position].getCategoria().getDescripcion());
-*/ // TODO: 08/09/2016 ARREGLAR HORAS Y PAGO
+        details.setText(String.format("Horas: %1$d Max $/Hora: %2$.2f",
+                listTrabajos[position].getHorasPresupuestadas(),
+                listTrabajos[position].getPrecioMaximoHora()));
+        corporation.setText(listTrabajos[position].getDescripcion());
+        deadline.setText(new SimpleDateFormat("yyyy-MM-dd")
+                .format(listTrabajos[position].getFechaEntrega()));
+        flag.setImageIcon(designarFlag(listTrabajos[position].getMonedaPago()));
+        english.setChecked(listTrabajos[position].getRequiereIngles());
 
 
         return row;
+    }
+
+    private Icon designarFlag(Integer monedaPago) {
+        int idFlag = 0;
+        switch (monedaPago){
+            case 1:
+                idFlag = R.drawable.us;
+                break;
+            case 2:
+                idFlag = R.drawable.eu;
+                break;
+            case 3:
+                idFlag = R.drawable.ar;
+                break;
+            case 4:
+                idFlag = R.drawable.uk;
+                break;
+            case 5:
+                idFlag = R.drawable.br;
+                break;
+        }
+        return Icon.createWithResource(contexto, idFlag);
     }
 }

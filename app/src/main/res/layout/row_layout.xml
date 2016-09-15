@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:clickable="false">
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +62,12 @@
             android:text="En Ingles"
             android:id="@+id/checkEnglish"
             android:checked="false"
-            android:layout_weight="0.09" />
+            android:layout_weight="0.09"
+            android:clickable="false"
+            android:allowUndo="false"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:enabled="false" />
 
     </LinearLayout>
 
