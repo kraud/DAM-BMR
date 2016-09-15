@@ -2,7 +2,7 @@
 
 
 
-## Laboratorio 02: Listas
+## Laboratorio 03: Listas Avanzadas
 
 
 
@@ -17,6 +17,7 @@ Laboratorios anteriores:
 
 
 1. [Introducción](../../tree/lab01)
+2. [Listas](../../tree/lab02)
 
 
 

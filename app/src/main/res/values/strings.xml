@@ -1,14 +1,3 @@
 <resources>
-    <string name="app_name">Lab02</string>
-    <string name="title">¡Pedite la cena!</string>
-    <string name="toggleOff">Reservar Mesa</string>
-    <string name="toggleOn">Delivery</string>
-    <string name="spinnerLabel">Seleccione el horario</string>
-    <string name="switchReserva">Notificar Reserva 1 hora antes</string>
-    <string name="plato">Plato</string>
-    <string name="postre">Postre</string>
-    <string name="bebida">Bebida</string>
-    <string name="agregarButton">Agregar</string>
-    <string name="confirmarButton">Confirmar Pedido</string>
-    <string name="reiniciarButton">Reiniciar</string>
+    <string name="app_name">WorkFromHome</string>
 </resources>

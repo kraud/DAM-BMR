@@ -1,4 +1,4 @@
-package com.dam.kevoundfreunde.lab02;
+package com.dam.kevoundfreunde.workfromhome;
 
 import org.junit.Test;
 

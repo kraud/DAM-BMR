@@ -1,4 +1,4 @@
-package com.dam.kevoundfreunde.lab02;
+package com.dam.kevoundfreunde.workfromhome;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
