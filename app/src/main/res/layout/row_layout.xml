@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:weightSum="1"
     android:clickable="false">
@@ -11,7 +11,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/textPuesto"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:textColor="#de000000" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,11 +20,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/textCorporation"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#de000000" />
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:weightSum="1">
 
@@ -32,7 +34,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/textDetails" />
+            android:id="@+id/textDetails"
+            android:textColor="#de000000" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -43,7 +46,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:weightSum="1"
         android:layout_gravity="center_horizontal"
@@ -54,10 +57,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/textDeadline" />
+            android:id="@+id/textDeadline"
+            android:textColor="#de000000" />
 
         <CheckBox
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="En Ingles"
             android:id="@+id/checkEnglish"
@@ -67,7 +71,8 @@
             android:allowUndo="false"
             android:contextClickable="false"
             android:elegantTextHeight="false"
-            android:enabled="false" />
+            android:enabled="false"
+            android:textColor="#de000000" />
 
     </LinearLayout>
 

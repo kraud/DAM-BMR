@@ -31,22 +31,22 @@ public class RowAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return listTrabajos.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return listTrabajos[position];
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return listTrabajos[position].getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = inflater.inflate(R.layout.row_layout, null);
+        View row = inflater.inflate(R.layout.row_layout, parent, false);
 
         TextView puesto, corporation, details, deadline;
         ImageView flag;
