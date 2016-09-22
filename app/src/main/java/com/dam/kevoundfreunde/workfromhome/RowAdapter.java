@@ -27,6 +27,7 @@ public class RowAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(context);
         listTrabajos = trabajos;
         contexto = context;
+
     }
 
     @Override

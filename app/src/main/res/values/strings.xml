@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">WorkFromHome</string>
+    <string name="newTrabajoTitulo">Crear trabajo</string>
+    <string name="descripcionLabel">Descripcion:</string>
+    <string name="horasLabel">Horas presupuestadas:</string>
+    <string name="categoriaLabel">Categoria:</string>
+    <string name="precioLabel">Precio por hora:</string>
+    <string name="monedaLabel">Moneda:</string>
+    <string name="fechaLabel">Fecha limite:</string>
+    <string name="inglesCheck">En Ingles</string>
+    <string name="ingresarLabel">Guardar</string>
+
 </resources>
