@@ -83,13 +83,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/inputPrecio"
-            android:layout_weight="0.62" />
+            android:layout_weight="0.62"
+            android:inputType="numberDecimal" />
 
         <Spinner
             android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:id="@+id/inputMoneda"
             android:layout_weight="0.19" />
+
     </LinearLayout>
 
     <TextView
@@ -104,7 +106,8 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/inputDate" />
+        android:id="@+id/inputDate"
+        android:editable="false" />
 
     <CheckBox
         android:layout_width="286dp"

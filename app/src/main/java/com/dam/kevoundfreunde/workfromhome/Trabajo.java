@@ -43,6 +43,18 @@ public class Trabajo implements Serializable{
         this.categoria = cat;
     }
 
+    public Trabajo(Integer id, String desc, Categoria cat, Integer horas, Double precio, Date fecha,
+    Integer moneda, Boolean ingles){
+        this.setId(id);
+        this.setCategoria(cat);
+        this.setDescripcion(desc);
+        this.setHorasPresupuestadas(horas);
+        this.setPrecioMaximoHora(precio);
+        this.setFechaEntrega(fecha);
+        this.setMonedaPago(moneda);
+        this.setRequiereIngles(ingles);
+    }
+
     public Integer getId() {
         return id;
     }

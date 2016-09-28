@@ -9,5 +9,12 @@
     <string name="fechaLabel">Fecha limite:</string>
     <string name="inglesCheck">En Ingles</string>
     <string name="ingresarLabel">Guardar</string>
+    <string-array name="monedas">
+        <item>Pesos ARS</item>
+        <item>Reales</item>
+        <item>Euros</item>
+        <item>Libras Esterlinas</item>
+        <item>Dólares</item>
+    </string-array>
 
 </resources>
