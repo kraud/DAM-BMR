@@ -24,12 +24,11 @@ import java.util.Date;
  * Created by Kevo on 22/09/2016.
  */
 public class AltaTrabajoActivity extends AppCompatActivity implements View.OnClickListener{
-
+    ArrayList<Trabajo> listaTrabajos = new ArrayList<Trabajo>();
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trabajo_layout);
-
         // Setear spinner categorias
         Spinner categorias = (Spinner) findViewById(R.id.spinnerCategorias);
         ArrayList<String> listaCategorias = obtenerCategorias(Categoria.CATEGORIAS_MOCK);
@@ -69,7 +68,7 @@ public class AltaTrabajoActivity extends AppCompatActivity implements View.OnCli
         Double precioDouble = Double.parseDouble(precioString);
         EditText fecha = (EditText) findViewById(R.id.inputDate);
         String fechaString = fecha.getText().toString();
-        Date fechaDate = stringToDate(fechaString, "EEE MMM d HH:mm:ss zz yyyy");
+        Date fechaDate = stringToDate(fechaString, "dd/MM/yyyy");
         Spinner categoria = (Spinner) findViewById(R.id.spinnerCategorias);
         String categoriaString = categoria.getSelectedItem().toString();
         Spinner moneda = (Spinner) findViewById(R.id.inputMoneda);
@@ -79,10 +78,14 @@ public class AltaTrabajoActivity extends AppCompatActivity implements View.OnCli
 
         Categoria categoriaFinal = getCategoria(Categoria.CATEGORIAS_MOCK, categoriaString);
         Integer monedaFinal = transformarMoneda(monedaString) ;
-        int idTrabajo = Trabajo.TRABAJOS_MOCK.length + 1;
+        Bundle b = getIntent().getExtras();
+        listaTrabajos = (ArrayList<Trabajo>) b.getSerializable("listaTrabajos");
+        int idTrabajo = listaTrabajos.size() + 1;
 
         Trabajo nuevo = new Trabajo(idTrabajo, descripcionString, categoriaFinal,horasInteger,
                 precioDouble, fechaDate, monedaFinal,inglesBool);
+        Log.v("Fecha: ", String.valueOf(fechaDate));
+        Log.v("Id:", " " + idTrabajo);
 
         // Crear nuevo Intent a retornar
         Intent returnIntent = new Intent();

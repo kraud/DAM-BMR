@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -19,10 +20,10 @@ import java.util.zip.Inflater;
  */
 public class RowAdapter extends BaseAdapter {
     LayoutInflater inflater;
-    Trabajo[] listTrabajos;
+    ArrayList<Trabajo> listTrabajos;
     Context contexto;
 
-    RowAdapter(Trabajo[] trabajos, Context context){
+    RowAdapter(ArrayList<Trabajo> trabajos, Context context){
         super();
         inflater = LayoutInflater.from(context);
         listTrabajos = trabajos;
@@ -32,17 +33,17 @@ public class RowAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listTrabajos.length;
+        return listTrabajos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listTrabajos[position];
+        return listTrabajos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return listTrabajos[position].getId();
+        return listTrabajos.get(position).getId();
     }
 
     @Override
@@ -61,15 +62,15 @@ public class RowAdapter extends BaseAdapter {
         english = (CheckBox) row.findViewById(R.id.checkEnglish);
 
 
-        puesto.setText(listTrabajos[position].getCategoria().getDescripcion());
+        puesto.setText(listTrabajos.get(position).getCategoria().getDescripcion());
         details.setText(String.format("Horas: %1$d Max $/Hora: %2$.2f",
-                listTrabajos[position].getHorasPresupuestadas(),
-                listTrabajos[position].getPrecioMaximoHora()));
-        corporation.setText(listTrabajos[position].getDescripcion());
+                listTrabajos.get(position).getHorasPresupuestadas(),
+                listTrabajos.get(position).getPrecioMaximoHora()));
+        corporation.setText(listTrabajos.get(position).getDescripcion());
         deadline.setText(new SimpleDateFormat("yyyy-MM-dd")
-                .format(listTrabajos[position].getFechaEntrega()));
-        flag.setImageIcon(designarFlag(listTrabajos[position].getMonedaPago()));
-        english.setChecked(listTrabajos[position].getRequiereIngles());
+                .format(listTrabajos.get(position).getFechaEntrega()));
+        flag.setImageIcon(designarFlag(listTrabajos.get(position).getMonedaPago()));
+        english.setChecked(listTrabajos.get(position).getRequiereIngles());
 
 
         return row;

@@ -12,25 +12,54 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    private ArrayList<Trabajo> listaTrabajos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Trabajo[] listTrabajos = Trabajo.TRABAJOS_MOCK;
-        Log.v("Trabajos:", listTrabajos[0].getDescripcion());
-        RowAdapter adaptador = new RowAdapter(listTrabajos, this);
+        final Trabajo[] listTrabajosArr = Trabajo.TRABAJOS_MOCK;
+        listaTrabajos = crarLista(listTrabajosArr);
+        Log.v("Trabajos:", listaTrabajos.get(0).getDescripcion());
+        RowAdapter adaptador = new RowAdapter(listaTrabajos, this);
         ListView lista = (ListView)findViewById(R.id.listView);
         lista.setAdapter(adaptador);
         lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                Toast.makeText(getApplicationContext(), listTrabajos[position].getDescripcion(),
+                Toast.makeText(getApplicationContext(), listaTrabajos.get(position).getDescripcion(),
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
+    }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        Log.v("Trabajos:", listaTrabajos.get(19).getDescripcion());
+        RowAdapter adaptador = new RowAdapter(listaTrabajos, this);
+        ListView lista = (ListView)findViewById(R.id.listView);
+        lista.setAdapter(adaptador);
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                Toast.makeText(getApplicationContext(), listaTrabajos.get(position).getDescripcion(),
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
+
+    private ArrayList<Trabajo> crarLista(Trabajo[] listTrabajosArr) {
+        ArrayList<Trabajo> resultado = new ArrayList<Trabajo>();
+        for (int i= 0; i<listTrabajosArr.length; i++){
+            resultado.add(listTrabajosArr[i]);
+        }
+        return resultado;
     }
 
     @Override
@@ -38,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.idMenu1:
                 Intent i = new Intent(this, AltaTrabajoActivity.class);
+                i.putExtra("listaTrabajos", listaTrabajos);
                 startActivityForResult(i,1);
                 break;
             case R.id.menu2:
@@ -61,7 +91,9 @@ public class MainActivity extends AppCompatActivity {
                 // Extraemos objeto de retorno del Bundle
                 Bundle bundle = data.getExtras();
                 Trabajo resultado = (Trabajo) bundle.getSerializable("nuevo");
-                Toast.makeText(getApplicationContext(), resultado.getDescripcion(),
+                listaTrabajos.add(resultado);
+                Toast.makeText(getApplicationContext(),
+                        resultado.getDescripcion() + " creado con éxito!",
                         Toast.LENGTH_SHORT).show();
             }
             else{
