@@ -17,4 +17,8 @@
         <item>Dólares</item>
     </string-array>
 
+    <!-- Menus -->
+    <string name="contextTitle">Acciones</string>
+    <string name="context1">Postularese a esta oferta</string>
+    <string name="context2">Compartir esta oferta</string>
 </resources>

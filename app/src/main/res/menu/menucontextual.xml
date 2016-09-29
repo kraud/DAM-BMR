@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.miapp.MainActivity">
-
-    <item
-        android:id="@+id/idMenu1"
-        android:title="Acciones"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/menu2"
-        android:orderInCategory="100"
-        android:title="Postularse a esta oferta"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu3"
-        android:orderInCategory="100"
-        android:title="Compartir ésta oferta"
-        app:showAsAction="never" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/context1"
+        android:title="@string/context1" />
+    <item android:id="@+id/context2"
+        android:title="@string/context2" />
 </menu>
