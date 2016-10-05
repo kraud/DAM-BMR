@@ -3,6 +3,7 @@ package com.dam.kevoundfreunde.laboratorio04;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,7 +55,10 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
-        //TODO implementar
+        Log.v("busquedaFinalizada","Busqueda finalizada: "+ listaDepartamento.toString());
+        departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this,listaDepartamento);
+        // tvEstadoBusqueda.setVisibility(View.GONE);
+        listaAlojamientos.setAdapter(departamentosAdapter);
     }
 
     @Override

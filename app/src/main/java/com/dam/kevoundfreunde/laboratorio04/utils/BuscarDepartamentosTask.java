@@ -1,6 +1,7 @@
 package com.dam.kevoundfreunde.laboratorio04.utils;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,6 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
         Double precioMax = busqueda[0].getPrecioMaximo();
         Boolean permiteFumar = busqueda[0].getPermiteFumar();
         Integer huespedes = busqueda[0].getHuespedes();
-
         resultado = filterDepartamentos(todos, ciudadBuscada, precioMin, precioMax, permiteFumar,
                 huespedes, contador);
         return resultado;
@@ -57,13 +57,16 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
 
         List<Departamento> resultado = new ArrayList<Departamento>();
         for(Departamento d: todos){
+            Log.v("Datos1",d.getCiudad()+ " "+ d.getPrecio()+" "+d.getNoFumador()+ " "+d.getCantidadCamas());
+            Log.v("Datos2",ciudadBuscada+ " "+ precioMax+" "+precioMin+" "+ permiteFumar+ " "+huespedes);
             if(d.getCiudad() == ciudadBuscada
-                    && (d.getPrecio() < precioMax && d.getPrecio()>precioMin)
+                    && (d.getPrecio() < precioMax && d.getPrecio() > precioMin)
                     && (d.getNoFumador() == permiteFumar)
                     && (d.getCantidadCamas() > huespedes)
             ){
                 resultado.add(d);
                 contador++;
+                Log.v("Contador", "Contador: "+contador);
                 publishProgress(contador);
             }
         }
