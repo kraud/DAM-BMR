@@ -59,7 +59,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
     @Override
     public void busquedaActualizada(String msg) {
-        tvEstadoBusqueda.setText(" Buscando..."+msg);
+        tvEstadoBusqueda.setText(" Buscando... "+msg);
     }
 
 }

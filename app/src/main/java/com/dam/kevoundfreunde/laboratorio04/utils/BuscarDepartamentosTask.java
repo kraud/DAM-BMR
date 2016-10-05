@@ -25,14 +25,12 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
 
     @Override
     protected void onPostExecute(List<Departamento> departamentos) {
-
+        listener.busquedaFinalizada(departamentos);
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        listener.busquedaActualizada("departamento "+values[0]);
-
-
+        listener.busquedaActualizada(values[0]+" departamentos encontrados.");
     }
 
     @Override
@@ -53,7 +51,8 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
 
     private List<Departamento> filterDepartamentos(List<Departamento> todos, Ciudad ciudadBuscada,
                                                    Double precioMin, Double precioMax,
-                                                   Boolean permiteFumar, Integer huespedes, int contador) {
+                                                   Boolean permiteFumar, Integer huespedes,
+                                                   int contador) {
 
 
         List<Departamento> resultado = new ArrayList<Departamento>();
