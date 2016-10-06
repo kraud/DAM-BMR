@@ -40,6 +40,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         listaAlojamientos= (ListView ) findViewById(R.id.listaAlojamientos);
         tvEstadoBusqueda = (TextView) findViewById(R.id.estadoBusqueda);
         registerForContextMenu(listaAlojamientos);
+        setTitle("Departamentos");
     }
 
     @Override
@@ -92,8 +93,9 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
             case R.id.context1:
                 List<Departamento> departamentos = busqueda ? listaFiltrada : lista;
                 Toast.makeText(getApplicationContext(),
-                        "Registraste "+departamentos.get(info.position).getDescripcion(),
+                        "Reservaste "+departamentos.get(info.position).getDescripcion(),
                         Toast.LENGTH_SHORT).show();
+                AltaReservaActivity.agregarReserva(departamentos.get(info.position));
                 return true;
             default:
                 return super.onContextItemSelected(item);

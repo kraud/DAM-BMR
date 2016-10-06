@@ -163,17 +163,20 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent i;
         switch (id){
             case R.id.nav_deptos:
-                Intent i1 = new Intent(MainActivity.this,ListaDepartamentosActivity.class);
-                i1.putExtra("esBusqueda",false );
-                startActivity(i1);
+                i = new Intent(MainActivity.this,ListaDepartamentosActivity.class);
+                i.putExtra("esBusqueda",false );
+                startActivity(i);
                 break;
             case R.id.nav_ofertas:
                 break;
             case R.id.nav_perfil:
                 break;
             case R.id.nav_reservas:
+                i = new Intent(MainActivity.this, AltaReservaActivity.class);
+                startActivity(i);
                 break;
             case R.id.nav_destinos:
                 break;
