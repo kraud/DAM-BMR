@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,8 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
     private ListView listaAlojamientos;
     private DepartamentoAdapter departamentosAdapter;
     private List<Departamento> lista;
+    private List<Departamento> listaFiltrada;
+    private Boolean busqueda = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         lista= new ArrayList<>();
         listaAlojamientos= (ListView ) findViewById(R.id.listaAlojamientos);
         tvEstadoBusqueda = (TextView) findViewById(R.id.estadoBusqueda);
-
+        registerForContextMenu(listaAlojamientos);
     }
 
     @Override
@@ -40,6 +47,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
+        busqueda = esBusqueda;
         if(esBusqueda){
             FormBusqueda fb = (FormBusqueda ) intent.getSerializableExtra("frmBusqueda");
             new BuscarDepartamentosTask(ListaDepartamentosActivity.this).execute(fb);
@@ -55,6 +63,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
+        listaFiltrada = listaDepartamento;
         Log.v("busquedaFinalizada","Busqueda finalizada: "+ listaDepartamento.toString());
         DepartamentoAdapter otro = new DepartamentoAdapter(ListaDepartamentosActivity.this,listaDepartamento);
         tvEstadoBusqueda.setVisibility(View.GONE);
@@ -66,4 +75,28 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         tvEstadoBusqueda.setText(" Buscando... "+msg);
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view,
+                                    ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu, view, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_reserva, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+                .getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.context1:
+                List<Departamento> departamentos = busqueda ? listaFiltrada : lista;
+                Toast.makeText(getApplicationContext(),
+                        "Registraste "+departamentos.get(info.position).getDescripcion(),
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
 }

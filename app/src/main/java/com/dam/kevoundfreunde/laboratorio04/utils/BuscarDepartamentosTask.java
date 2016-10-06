@@ -59,7 +59,7 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
         for(Departamento d: todos){
             Log.v("Datos1",d.getCiudad()+ " "+ d.getPrecio()+" "+d.getNoFumador()+ " "+d.getCantidadCamas());
             Log.v("Datos2",ciudadBuscada+ " "+ precioMax+" "+precioMin+" "+ permiteFumar+ " "+huespedes);
-            if(d.getCiudad().getNombre().equals(ciudadBuscada.getNombre())
+            if(d.getCiudad().equals(ciudadBuscada)
                     && ((Double.compare(d.getPrecio(),precioMax) < 0) && (Double.compare(d.getPrecio(),precioMin) > 0))
                     //&& (d.getNoFumador().equals(permiteFumar))
                     //&& (d.getCantidadCamas().intValue() >= huespedes.intValue())
