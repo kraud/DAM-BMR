@@ -8,4 +8,8 @@
     <string name="action_settings">Configuracion</string>
 
     <string name="context1">Reservar</string>
+
+    <string name="pref_usuario">Nombre de Usuario</string>
+    <string name="pref_email">Email</string>
+    <string name="pref_ringtone">Ringtone</string>
 </resources>

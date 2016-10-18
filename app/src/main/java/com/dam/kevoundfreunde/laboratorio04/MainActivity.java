@@ -1,7 +1,10 @@
 package com.dam.kevoundfreunde.laboratorio04;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.SharedElementCallback;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -76,6 +79,10 @@ public class MainActivity extends AppCompatActivity
 
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnBuscar.setOnClickListener(btnBuscarListener);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.getString("pref_nombre", "Android Studio");
+        prefs.getString("pref_email", "ejemplo@ejemplo.com");
     }
 
     private View.OnClickListener btnBuscarListener = new View.OnClickListener() {
@@ -152,6 +159,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(i);
             return true;
         }
 
