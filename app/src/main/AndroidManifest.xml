@@ -24,7 +24,7 @@
         <receiver android:name=".ReceptorAlarma"
             android:enabled="false"/>
         <activity android:name=".AltaReservaActivity"></activity>
-
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

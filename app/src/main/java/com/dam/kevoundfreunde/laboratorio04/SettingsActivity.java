@@ -3,8 +3,6 @@ package com.dam.kevoundfreunde.laboratorio04;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.R;
-
 /**
  * Created by Juxtar on 06/10/2016.
  */

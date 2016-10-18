@@ -29,8 +29,6 @@ import java.util.Arrays;
 import com.dam.kevoundfreunde.laboratorio04.modelo.Ciudad;
 import com.dam.kevoundfreunde.laboratorio04.utils.FormBusqueda;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.R;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

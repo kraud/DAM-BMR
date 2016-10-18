@@ -10,8 +10,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.R;
-
 import com.dam.kevoundfreunde.laboratorio04.modelo.Departamento;
 
 public class DepartamentoAdapter extends ArrayAdapter<Departamento> {
