@@ -9,8 +9,6 @@ import com.dam.kevoundfreunde.laboratorio04.modelo.Departamento;
 import java.util.ArrayList;
 import java.util.List;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.R;
-
 public class AltaReservaActivity extends AppCompatActivity {
 
     public static List<Departamento> reservados = new ArrayList<>();

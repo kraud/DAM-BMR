@@ -1,5 +1,8 @@
 package com.dam.kevoundfreunde.laboratorio04;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-
-import dam.isi.frsf.utn.edu.ar.laboratorio04.R;
 
 import com.dam.kevoundfreunde.laboratorio04.utils.BuscarDepartamentosTask;
 import com.dam.kevoundfreunde.laboratorio04.modelo.Departamento;
@@ -96,9 +98,25 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
                         "Reservaste "+departamentos.get(info.position).getDescripcion(),
                         Toast.LENGTH_SHORT).show();
                 AltaReservaActivity.agregarReserva(departamentos.get(info.position));
+
+
+                AlarmManager am = (AlarmManager) getApplicationContext()
+                        .getSystemService(Context.ALARM_SERVICE);
+
+                Intent alarmaIntent = new Intent(getApplicationContext(), ReceptorAlarma.class);
+                alarmaIntent.putExtra("reserva", departamentos.get(info.position).getId());
+
+                PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 1,
+                        alarmaIntent, 0);
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(cal.getTimeInMillis()+5000);
+                am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
+
+
 }

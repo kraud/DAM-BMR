@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dam.isi.frsf.utn.edu.ar.laboratorio04">
+    package="com.dam.kevoundfreunde.laboratorio04">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.dam.kevoundfreunde.laboratorio04.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -18,8 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.dam.kevoundfreunde.laboratorio04.ListaDepartamentosActivity" />
-        <activity android:name="com.dam.kevoundfreunde.laboratorio04.AltaReservaActivity"></activity>
+        <activity android:name=".ListaDepartamentosActivity">
+
+        </activity>
+        <receiver android:name=".ReceptorAlarma"
+            android:enabled="false"/>
+        <activity android:name=".AltaReservaActivity"></activity>
+
     </application>
 
 </manifest>
