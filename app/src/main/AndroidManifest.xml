@@ -21,8 +21,11 @@
         <activity android:name=".ListaDepartamentosActivity">
 
         </activity>
-        <receiver android:name=".ReceptorAlarma"
-            android:enabled="false"/>
+        <receiver android:name=".ReceptorAlarma">
+            <intent-filter>
+                <action android:name="com.dam.kevoundfreunde.laboratorio04.ListaDepartamentosActivity.ReceptorAlarma" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".AltaReservaActivity"></activity>
         <activity android:name=".SettingsActivity"></activity>
     </application>

@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,16 +101,20 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
                 AltaReservaActivity.agregarReserva(departamentos.get(info.position));
 
 
-                AlarmManager am = (AlarmManager) getApplicationContext()
-                        .getSystemService(Context.ALARM_SERVICE);
+                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                Intent alarmaIntent = new Intent(getApplicationContext(), ReceptorAlarma.class);
+                final String ALARMA = "com.dam.kevoundfreunde.laboratorio04.ListaDepartamentosActivity.ReceptorAlarma";
+                IntentFilter intentFilter = new IntentFilter(ALARMA);
+                ReceptorAlarma receptor = new ReceptorAlarma();
+                registerReceiver(receptor, intentFilter);
+
+                Intent alarmaIntent = new Intent(this, ReceptorAlarma.class);
                 alarmaIntent.putExtra("reserva", departamentos.get(info.position).getId());
 
                 PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 1,
                         alarmaIntent, 0);
                 Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(cal.getTimeInMillis()+5000);
+                //cal.setTimeInMillis(cal.getTimeInMillis()+5000);
                 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
 
                 return true;
