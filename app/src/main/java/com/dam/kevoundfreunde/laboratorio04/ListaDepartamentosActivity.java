@@ -109,7 +109,9 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
                 registerReceiver(receptor, intentFilter);
 
                 Intent alarmaIntent = new Intent(this, ReceptorAlarma.class);
-                alarmaIntent.putExtra("reserva", departamentos.get(info.position).getId());
+                Bundle reserva = new Bundle();
+                reserva.putSerializable("departamento",departamentos.get(info.position));
+                alarmaIntent.putExtras(reserva);
 
                 PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 1,
                         alarmaIntent, 0);
