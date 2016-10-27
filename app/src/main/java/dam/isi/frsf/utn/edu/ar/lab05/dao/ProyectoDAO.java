@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.lab05.modelo.Prioridad;
@@ -107,6 +108,27 @@ public class ProyectoDAO {
     }
 
     public List<Usuario> listarUsuarios(){
+        SQLiteDatabase mydb = dbHelper.getReadableDatabase();
+        Cursor cursor = mydb.rawQuery(
+                "SELECT "+ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO + ", " +
+                ProyectoDBMetadata.TablaUsuariosMetadata.MAIL + ", " +
+                ProyectoDBMetadata.TablaUsuariosMetadata._ID +
+                "FROM " + ProyectoDBMetadata.TABLA_USUARIOS, null);
+        List<Usuario> usuarios = new ArrayList<>();
+        if (cursor.moveToFirst()){
+            do{
+                String nombre = cursor.getString(cursor.getColumnIndex(
+                        ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO));
+                String email = cursor.getString(cursor.getColumnIndex(
+                        ProyectoDBMetadata.TablaUsuariosMetadata.MAIL));
+                Integer id = cursor.getInt(cursor.getColumnIndex(
+                        ProyectoDBMetadata.TablaUsuariosMetadata._ID));
+
+                Usuario user = new Usuario(id, nombre, email);
+                usuarios.add(user);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
         return null;
     }
 
