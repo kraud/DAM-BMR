@@ -1,15 +1,4 @@
 <resources>
-    <string name="app_name">Laboratorio04</string>
-    <string name="title_activity_main2">Reservalo.com</string>
-
-    <string name="navigation_drawer_open">Mostrar Opciones</string>
-    <string name="navigation_drawer_close">Ocultar Opciones</string>
-
-    <string name="action_settings">Configuracion</string>
-
-    <string name="context1">Reservar</string>
-
-    <string name="pref_usuario">Nombre de Usuario</string>
-    <string name="pref_email">Email</string>
-    <string name="pref_ringtone">Ringtone</string>
+    <string name="app_name">Laboratorio05</string>
+    <string name="action_settings">Settings</string>
 </resources>
