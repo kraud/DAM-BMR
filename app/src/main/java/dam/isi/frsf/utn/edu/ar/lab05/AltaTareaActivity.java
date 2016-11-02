@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -65,6 +66,13 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+
+        Button btnGuardar = (Button) findViewById(R.id.btnGuardar);
+        Button btnCancelar = (Button) findViewById(R.id.btnCanelar);
+
+        btnGuardar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
+
     }
 
 
@@ -79,9 +87,10 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
                         false,
                         null,
                         new Prioridad(prioridadValor, null),
-                        new Usuario(0, null, null)); //TODO Mandar usuario del spinner
+                        new Usuario(0, null, null), //TODO Mandar usuario del spinner
+                        descripcion.getText().toString());
                 proyectoDAO.nuevaTarea(tarea);
-                break;
+                Log.v("Guardar","Guardar Tarea");
             case R.id.btnCanelar:
                 finish();
                 break;

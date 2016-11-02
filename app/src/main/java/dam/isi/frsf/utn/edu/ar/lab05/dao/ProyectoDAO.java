@@ -73,7 +73,28 @@ public class ProyectoDAO {
     }
 
     public void nuevaTarea(Tarea t){
+        SQLiteDatabase mydb = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
 
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA, t.getFinalizada());
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS, t.getHorasEstimadas());
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS, t.getMinutosTrabajados());
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.PROYECTO, 1); // hardcodeado porque solo existe un unico proyecto
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD, t.getPrioridad().getId());
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.RESPONSABLE, t.getResponsable().getId());
+        valores.put(ProyectoDBMetadata.TablaTareasMetadata.TAREA, t.getDescripcion());
+
+        int id = (int) mydb.insert(ProyectoDBMetadata.TABLA_TAREAS, null, valores);
+        Log.v("ProyectoDAO", "El ID es: " + id);
+        Cursor cursor = mydb.rawQuery("SELECT "+ProyectoDBMetadata.TablaTareasMetadata.TAREA +
+                        " FROM "+ProyectoDBMetadata.TABLA_TAREAS+
+                        " WHERE _id = "+id
+                ,null);
+        cursor.moveToFirst();
+        String desc = cursor.getString(cursor.getColumnIndex(
+                ProyectoDBMetadata.TablaTareasMetadata.TAREA));
+        Log.v("ProyectoDAO", "La descripcion es: " + desc);
+        mydb.close();
     }
 
     public void actualizarTarea(Tarea t){
