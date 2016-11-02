@@ -113,7 +113,7 @@ public class ProyectoDAO {
                 "SELECT "+ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO + ", " +
                 ProyectoDBMetadata.TablaUsuariosMetadata.MAIL + ", " +
                 ProyectoDBMetadata.TablaUsuariosMetadata._ID +
-                "FROM " + ProyectoDBMetadata.TABLA_USUARIOS, null);
+                " FROM " + ProyectoDBMetadata.TABLA_USUARIOS, null);
         List<Usuario> usuarios = new ArrayList<>();
         if (cursor.moveToFirst()){
             do{
@@ -121,15 +121,13 @@ public class ProyectoDAO {
                         ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO));
                 String email = cursor.getString(cursor.getColumnIndex(
                         ProyectoDBMetadata.TablaUsuariosMetadata.MAIL));
-                Integer id = cursor.getInt(cursor.getColumnIndex(
-                        ProyectoDBMetadata.TablaUsuariosMetadata._ID));
 
-                Usuario user = new Usuario(id, nombre, email);
+                Usuario user = new Usuario(null, nombre, email);
                 usuarios.add(user);
             }while(cursor.moveToNext());
         }
         cursor.close();
-        return null;
+        return usuarios;
     }
 
     public void finalizar(Integer idTarea){
