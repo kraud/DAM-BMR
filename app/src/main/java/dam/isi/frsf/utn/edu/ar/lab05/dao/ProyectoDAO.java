@@ -128,27 +128,11 @@ public class ProyectoDAO {
         return null;
     }
 
-    public List<Usuario> listarUsuarios(){
+    public Cursor listarUsuarios(){
         SQLiteDatabase mydb = dbHelper.getReadableDatabase();
         Cursor cursor = mydb.rawQuery(
-                "SELECT "+ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO + ", " +
-                ProyectoDBMetadata.TablaUsuariosMetadata.MAIL + ", " +
-                ProyectoDBMetadata.TablaUsuariosMetadata._ID +
-                " FROM " + ProyectoDBMetadata.TABLA_USUARIOS, null);
-        List<Usuario> usuarios = new ArrayList<>();
-        if (cursor.moveToFirst()){
-            do{
-                String nombre = cursor.getString(cursor.getColumnIndex(
-                        ProyectoDBMetadata.TablaUsuariosMetadata.USUARIO));
-                String email = cursor.getString(cursor.getColumnIndex(
-                        ProyectoDBMetadata.TablaUsuariosMetadata.MAIL));
-
-                Usuario user = new Usuario(null, nombre, email);
-                usuarios.add(user);
-            }while(cursor.moveToNext());
-        }
-        cursor.close();
-        return usuarios;
+                "SELECT _ID _id, NOMBRE, CORREO_ELECTRONICO FROM USUARIOS", null);
+        return cursor;
     }
 
     public void finalizar(Integer idTarea){
