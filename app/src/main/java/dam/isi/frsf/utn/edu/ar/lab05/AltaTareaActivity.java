@@ -1,14 +1,19 @@
 package dam.isi.frsf.utn.edu.ar.lab05;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +39,24 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_alta_tarea);
 
         proyectoDAO = new ProyectoDAO(AltaTareaActivity.this);
-        List<Usuario> listaUsuarios = proyectoDAO.listarUsuarios();
+        Cursor cursor = proyectoDAO.listarUsuarios();
+        Cursor prueba = proyectoDAO.listarUsuarios();
+
+        prueba.moveToFirst();
+        String[] a = prueba.getColumnNames();
+        int b = prueba.getColumnIndex("_id");
+        Log.v("Prueba: " ,"Columnas: " + TextUtils.join(", ",a) + "index id: " + b);
 
         usuarios = (Spinner) findViewById(R.id.spinner);
         descripcion = (EditText) findViewById(R.id.editText);
         horasEstimadas = (EditText) findViewById(R.id.editText2);
         prioridad = (SeekBar) findViewById(R.id.seekBar);
 
-        List<CharSequence> nombreUsuarios = new ArrayList<>();
-
-        for(int i=0; i<listaUsuarios.size(); i++){
-            nombreUsuarios.add(listaUsuarios.get(i).getNombre());
-        }
-
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, nombreUsuarios);
+        int[] adapterRowViews = new int[]{android.R.id.text1};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getApplicationContext(),
+                android.R.layout.simple_spinner_item, cursor, new String[]{"NOMBRE"},
+                adapterRowViews, 0);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         usuarios.setAdapter(adapter);
 
         prioridad.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -86,7 +95,7 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
                         false,
                         null,
                         new Prioridad(prioridadValor, null),
-                        new Usuario(0, null, null), //TODO Mandar usuario del spinner
+                        new Usuario((int) usuarios.getSelectedItemId(), null, null), //TODO Mandar usuario del spinner
                         descripcion.getText().toString());
                 proyectoDAO.nuevaTarea(tarea);
                 Log.v("Guardar","Guardar Tarea");
