@@ -81,7 +81,6 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case R.id.btnGuardar:
                 Tarea tarea = new Tarea(0,
-                        false,
                         Integer.parseInt(horasEstimadas.getText().toString()),
                         0,
                         false,
