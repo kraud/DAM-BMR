@@ -1,5 +1,6 @@
 package dam.isi.frsf.utn.edu.ar.lab05;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,10 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
 
         btnGuardar.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Integer idTarea = bundle.getInt("ID_TAREA");
 
     }
 

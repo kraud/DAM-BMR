@@ -61,6 +61,7 @@ public class ProyectoDAO {
     }
 
     public Cursor listaTareas(Integer idProyecto){
+        open();
         Cursor cursorPry = db.rawQuery("SELECT "+ProyectoDBMetadata.TablaProyectoMetadata._ID+ " FROM "+ProyectoDBMetadata.TABLA_PROYECTO,null);
         Integer idPry= 0;
         if(cursorPry.moveToFirst()){
@@ -71,6 +72,42 @@ public class ProyectoDAO {
         Log.d("LAB05-MAIN","PROYECTO : _"+idPry.toString()+" - "+ _SQL_TAREAS_X_PROYECTO);
         cursor = db.rawQuery(_SQL_TAREAS_X_PROYECTO,new String[]{idPry.toString()});
         return cursor;
+    }
+
+    public Tarea getTarea(int idTarea){
+        SQLiteDatabase mydb = dbHelper.getWritableDatabase();
+        Cursor cursor = mydb.rawQuery("SELECT "+ProyectoDBMetadata.TABLA_TAREAS_ALIAS+"."+ProyectoDBMetadata.TablaTareasMetadata._ID+" as "+ProyectoDBMetadata.TablaTareasMetadata._ID+
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.TAREA +
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS +
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS +
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA +
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD +
+                        ", "+ProyectoDBMetadata.TABLA_PRIORIDAD_ALIAS+"."+ProyectoDBMetadata.TablaPrioridadMetadata.PRIORIDAD +" as "+ProyectoDBMetadata.TablaPrioridadMetadata.PRIORIDAD_ALIAS+
+                        ", "+ProyectoDBMetadata.TablaTareasMetadata.RESPONSABLE +
+                        " FROM "+
+                        ProyectoDBMetadata.TABLA_PRIORIDAD + " "+ProyectoDBMetadata.TABLA_PRIORIDAD_ALIAS+", "+
+                        ProyectoDBMetadata.TABLA_TAREAS + " "+ProyectoDBMetadata.TABLA_TAREAS_ALIAS+
+                        " WHERE "+ ProyectoDBMetadata.TABLA_TAREAS_ALIAS+"."+ ProyectoDBMetadata.TablaTareasMetadata._ID + " = "+ idTarea + " AND " +
+                        ProyectoDBMetadata.TABLA_TAREAS_ALIAS+"."+ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD+" = "+ProyectoDBMetadata.TABLA_PRIORIDAD_ALIAS+"."+ProyectoDBMetadata.TablaPrioridadMetadata._ID
+                ,null);
+        Tarea tarea = null;
+        if(cursor.moveToFirst()){
+            tarea = new Tarea(
+                cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata._ID)),
+                cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS)),
+                cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS)),
+                cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA)) == 1,
+                null,
+                new Prioridad(
+                    cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD)),
+                    cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaPrioridadMetadata.PRIORIDAD))
+                ),
+                new Usuario(cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD)), null, null),
+                cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.TAREA))
+            );
+        }
+        mydb.close();
+        return tarea;
     }
 
     public void nuevaTarea(Tarea t){
@@ -121,8 +158,10 @@ public class ProyectoDAO {
         mydb.close();
     }
 
-    public void borrarTarea(Tarea t){
-
+    public void borrarTarea(int idTarea){
+        SQLiteDatabase mydb = dbHelper.getWritableDatabase();
+        mydb.delete(ProyectoDBMetadata.TABLA_TAREAS, "_id = " +idTarea, null);
+        mydb.close();
     }
 
     public List<Prioridad> listarPrioridades(){

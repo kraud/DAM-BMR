@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -60,6 +62,7 @@ public class TareaCursorAdapter extends CursorAdapter {
         final Button btnFinalizar = (Button) view.findViewById(R.id.tareaBtnFinalizada);
         final Button btnEditar = (Button) view.findViewById(R.id.tareaBtnEditarDatos);
         final ToggleButton btnEstado = (ToggleButton) view.findViewById(R.id.tareaBtnTrabajando);
+        final ImageButton btnEliminar = (ImageButton) view.findViewById(R.id.tareaBtnEliminar);
 
         nombre.setText(cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.TAREA)));
         Integer horasAsigandas = cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS));
@@ -118,12 +121,28 @@ public class TareaCursorAdapter extends CursorAdapter {
                         public void run() {
                             Log.d("LAB05-MAIN","Tiempo añadido : --- "+tiempoTotal);
                             myDao.registerTrabajo(idTarea, tiempoTotal);
+                            handlerRefresh.sendEmptyMessage(1);
                         }
                     });
-                    actualizarTrabajado(cursor); //TODO Arreglar actualizar interfaz
                     backGroundUpdate.start();
-                    //Log.d("BtnEstado Changed", "Tiempo añadido: "+tiempoTotal);
                 }
+            }
+        });
+
+        btnEliminar.setTag(cursor.getInt(cursor.getColumnIndex("_id")));
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Integer idTarea = (Integer) view.getTag();
+                Thread backGroundUpdate = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("LAB05-MAIN", "eliminar tarea : --- " + idTarea);
+                        myDao.borrarTarea(idTarea);
+                        handlerRefresh.sendEmptyMessage(1);
+                    }
+                });
+                backGroundUpdate.start();
             }
         });
     }
