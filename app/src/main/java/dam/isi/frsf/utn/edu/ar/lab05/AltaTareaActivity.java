@@ -31,6 +31,7 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
     private EditText descripcion;
     private EditText horasEstimadas;
     private SeekBar prioridad;
+    private int idTarea;
 
     private int prioridadValor = 0;
 
@@ -41,12 +42,6 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
 
         proyectoDAO = new ProyectoDAO(AltaTareaActivity.this);
         Cursor cursor = proyectoDAO.listarUsuarios();
-        Cursor prueba = proyectoDAO.listarUsuarios();
-
-        prueba.moveToFirst();
-        String[] a = prueba.getColumnNames();
-        int b = prueba.getColumnIndex("_id");
-        Log.v("Prueba: " ,"Columnas: " + TextUtils.join(", ",a) + "index id: " + b);
 
         usuarios = (Spinner) findViewById(R.id.spinner);
         descripcion = (EditText) findViewById(R.id.editText);
@@ -85,8 +80,14 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Integer idTarea = bundle.getInt("ID_TAREA");
-
+        idTarea = bundle.getInt("ID_TAREA");
+        if (idTarea != 0) {
+            Tarea tarea = proyectoDAO.getTarea(idTarea);
+            descripcion.setText(tarea.getDescripcion());
+            horasEstimadas.setText(tarea.getHorasEstimadas());
+            prioridad.setProgress(tarea.getPrioridad().getId());
+            usuarios.setSelection(tarea.getResponsable().getId());
+        }
     }
 
 
@@ -96,7 +97,7 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
             case R.id.btnGuardar:
                 Tarea tarea = new Tarea(0,
                         Integer.parseInt(horasEstimadas.getText().toString()),
-                        0,
+                        idTarea,
                         false,
                         null,
                         new Prioridad(prioridadValor, null),

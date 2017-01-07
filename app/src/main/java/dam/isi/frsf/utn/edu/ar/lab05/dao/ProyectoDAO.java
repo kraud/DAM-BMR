@@ -186,7 +186,8 @@ public class ProyectoDAO {
     public List<Tarea> listarDesviosPlanificacion(Boolean soloTerminadas,Integer desvioMaximoMinutos){
         // retorna una lista de todas las tareas que tardaron más (en exceso) o menos (por defecto)
         // que el tiempo planificado.
-        // si la bandera soloTerminadas es true, se busca en las tareas terminadas, sino en todas.
+        // si la bandera soloTerminadas es true, se busca en las tareas terminadas, si no en todas.
+        SQLiteDatabase mydb = dbHelper.getReadableDatabase();
         return null;
     }
 
