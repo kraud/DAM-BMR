@@ -85,9 +85,8 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
         if (idTarea != 0) {
             Tarea tarea = proyectoDAO.getTarea(idTarea);
             descripcion.setText(tarea.getDescripcion());
-            horasEstimadas.setText(tarea.getHorasEstimadas());
+            horasEstimadas.setText(tarea.getHorasEstimadas().toString());
             prioridad.setProgress(tarea.getPrioridad().getId());
-            usuarios.setSelection(tarea.getResponsable().getId());
             minutosTrabajados = tarea.getMinutosTrabajados();
         }
     }

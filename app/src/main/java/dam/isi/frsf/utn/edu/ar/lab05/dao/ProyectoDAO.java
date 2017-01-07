@@ -100,7 +100,7 @@ public class ProyectoDAO {
                 null,
                 new Prioridad(
                     cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD)),
-                    cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaPrioridadMetadata.PRIORIDAD))
+                    cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaPrioridadMetadata.PRIORIDAD_ALIAS))
                 ),
                 new Usuario(cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD)), null, null),
                 cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.TAREA))
@@ -193,13 +193,10 @@ public class ProyectoDAO {
     }
 
     public List<Tarea> listarDesviosPlanificacion(Boolean soloTerminadas,Integer desvioMaximoMinutos){
-        // retorna una lista de todas las tareas que tardaron más (en exceso) o menos (por defecto)
-        // que el tiempo planificado.
-        // si la bandera soloTerminadas es true, se busca en las tareas terminadas, si no en todas.
         SQLiteDatabase mydb = dbHelper.getWritableDatabase();
         Cursor cursor = mydb.rawQuery("SELECT "+ProyectoDBMetadata.TablaTareasMetadata.TAREA +", "
             +ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS +" AS planificadas, "
-            +ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS+" AS trabajados "
+            +ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS+" AS trabajados, "
             +ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA+" AS Finalizada "+
             " FROM "+ProyectoDBMetadata.TABLA_TAREAS+
             " WHERE ABS(planificadas - trabajados) <= "+ desvioMaximoMinutos
