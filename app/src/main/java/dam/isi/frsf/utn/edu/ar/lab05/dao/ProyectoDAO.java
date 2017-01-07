@@ -136,7 +136,16 @@ public class ProyectoDAO {
     }
 
     public void actualizarTarea(Tarea t){
-
+        SQLiteDatabase mydb = dbHelper.getWritableDatabase();
+        Cursor cursor = mydb.rawQuery("UPDATE "+ProyectoDBMetadata.TABLA_TAREAS
+            +"SET "+ProyectoDBMetadata.TablaTareasMetadata.TAREA+" = "+t.getDescripcion()+", "
+            +ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS+" = "+t.getHorasEstimadas()+", "
+            +ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS+" = "+t.getMinutosTrabajados()+", "
+            +ProyectoDBMetadata.TablaTareasMetadata.PRIORIDAD+" = "+t.getPrioridad().getId()+", "
+            +ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS+" = "+t.getMinutosTrabajados()+", "
+            +ProyectoDBMetadata.TablaTareasMetadata.RESPONSABLE+" = "+t.getResponsable().getId()+" "
+            +"WHERE _id ="+t.getId()
+            ,null);
     }
 
     public void registerTrabajo (Integer idTarea, long tiempo) {
@@ -187,8 +196,28 @@ public class ProyectoDAO {
         // retorna una lista de todas las tareas que tardaron más (en exceso) o menos (por defecto)
         // que el tiempo planificado.
         // si la bandera soloTerminadas es true, se busca en las tareas terminadas, si no en todas.
-        SQLiteDatabase mydb = dbHelper.getReadableDatabase();
-        return null;
+        SQLiteDatabase mydb = dbHelper.getWritableDatabase();
+        Cursor cursor = mydb.rawQuery("SELECT "+ProyectoDBMetadata.TablaTareasMetadata.TAREA +", "
+            +ProyectoDBMetadata.TablaTareasMetadata.HORAS_PLANIFICADAS +" AS planificadas, "
+            +ProyectoDBMetadata.TablaTareasMetadata.MINUTOS_TRABAJADOS+" AS trabajados "
+            +ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA+" AS Finalizada "+
+            " FROM "+ProyectoDBMetadata.TABLA_TAREAS+
+            " WHERE ABS(planificadas - trabajados) <= "+ desvioMaximoMinutos
+            ,null);
+
+        ArrayList<Tarea> tareas = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            if(soloTerminadas && cursor.getInt(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.FINALIZADA))==0){
+                continue;
+            }
+            Tarea tarea = new Tarea(0,0,0,false,null,null,null,
+                cursor.getString(cursor.getColumnIndex(ProyectoDBMetadata.TablaTareasMetadata.TAREA)));
+
+            tareas.add(tarea);
+        }
+        mydb.close();
+        return tareas;
     }
 
 

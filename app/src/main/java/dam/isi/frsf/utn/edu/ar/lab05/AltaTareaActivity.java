@@ -32,6 +32,7 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
     private EditText horasEstimadas;
     private SeekBar prioridad;
     private int idTarea;
+    private int minutosTrabajados = 0;
 
     private int prioridadValor = 0;
 
@@ -87,6 +88,7 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
             horasEstimadas.setText(tarea.getHorasEstimadas());
             prioridad.setProgress(tarea.getPrioridad().getId());
             usuarios.setSelection(tarea.getResponsable().getId());
+            minutosTrabajados = tarea.getMinutosTrabajados();
         }
     }
 
@@ -95,15 +97,20 @@ public class AltaTareaActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnGuardar:
-                Tarea tarea = new Tarea(0,
+                Tarea tarea = new Tarea(idTarea,
                         Integer.parseInt(horasEstimadas.getText().toString()),
-                        idTarea,
+                        minutosTrabajados,
                         false,
                         null,
                         new Prioridad(prioridadValor, null),
                         new Usuario((int) usuarios.getSelectedItemId(), null, null), //TODO Mandar usuario del spinner
                         descripcion.getText().toString());
-                proyectoDAO.nuevaTarea(tarea);
+                if(idTarea==0){
+                    proyectoDAO.nuevaTarea(tarea);
+                }
+                else{
+                    proyectoDAO.actualizarTarea(tarea);
+                }
                 Log.v("Guardar","Guardar Tarea");
             case R.id.btnCanelar:
                 finish();
