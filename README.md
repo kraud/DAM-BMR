@@ -1,6 +1,6 @@
 # Desarrollo de Aplicaciones Móviles
 
-## Laboratorio 05: Persistencia de Datos
+## Laboratorio 06: API Rest - Contactos
 
 ### Formato del repositorio
 
@@ -12,6 +12,7 @@ Laboratorios anteriores:
 2. [Listas](../../tree/lab02)
 3. [Listas Avanzadas](../../tree/lab03)
 4. [Tareas Notificaciones - Broadcast](../../tree/lab04)
+5. [Persistencia de Datos](../../tree/lab05)
 
 ### Integrantes
 
