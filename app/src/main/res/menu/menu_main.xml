@@ -8,4 +8,6 @@
         android:title="@string/action_settings"
         app:showAsAction="always"
         android:icon="@drawable/ic_search_white_24dp" />
+    <item android:title="Proyectos"
+        android:id="@+id/mostrarProyectos" />
 </menu>

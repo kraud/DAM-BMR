@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity  {
             Intent i = new Intent(MainActivity.this, BuscarTareaActivity.class);
             startActivity(i);
         }
-            return true;
+        if (id == R.id.mostrarProyectos) {
+            Intent i = new Intent(MainActivity.this, ProyectosActivity.class);
+            startActivity(i);
+        }
+        return true;
     }
 
     @Override
