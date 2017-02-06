@@ -9,8 +9,12 @@
       "nombre": "Proyecto Matias Malvado"
     },
     {
-      "nombre": "Proyecto Prueba",
+      "nombre": "Proyecto Pruebas",
       "id": 3
+    },
+    {
+      "nombre": "Proyectote",
+      "id": 5
     }
   ],
   "prioridades": [

@@ -8,7 +8,7 @@
     tools:context="dam.isi.frsf.utn.edu.ar.lab05.MainActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/nuevo_proyecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

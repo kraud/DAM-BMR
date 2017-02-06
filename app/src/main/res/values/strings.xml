@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Laboratorio05</string>
     <string name="action_settings">Settings</string>
+    <string name="proyecto_hint">Nombre de Proyecto</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
