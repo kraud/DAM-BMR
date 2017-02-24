@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LabMaps</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="google_maps_key">AIzaSyAOXG8hizjTMAdOrgkEnCBNhBe-S8A4F5I</string>
+
+    <string name="text_label_reclamo">Describa el reclamo</string>
+    <string name="text_label_telefono">Teléfono de contacto</string>
+    <string name="text_label_email">Correo electrónico</string>
+    <string name="button_accept">Reclamar!</string>
+    <string name="button_cancel">Cancelar</string>
+</resources>
