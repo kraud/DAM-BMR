@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "192867372449",
+    "firebase_url": "https://laboratorio09-d669b.firebaseio.com",
+    "project_id": "laboratorio09-d669b",
+    "storage_bucket": "laboratorio09-d669b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192867372449:android:d05dbf27acacc8ed",
+        "android_client_info": {
+          "package_name": "com.dam.kevoundfreunde.laboratorio09"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192867372449-nqiqsgqkikau26fiqj9c7ms5qk4ap0o3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-KnF3srdc-M030YmQKT9ZF6RRTqkPpdI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
